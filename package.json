@@ -1,0 +1,25 @@
+{
+  "name": "satark",
+  "version": "1.0.0",
+  "description": "Realtime crime mapping",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass --watch public -o public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shikharbhardwaj/satark.git"
+  },
+  "author": "Shikhar Bhardwaj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shikharbhardwaj/satark/issues"
+  },
+  "homepage": "https://github.com/shikharbhardwaj/satark#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "pg": "^7.4.1",
+    "pug": "^2.0.1"
+  }
+}
