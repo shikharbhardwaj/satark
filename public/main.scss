@@ -21,8 +21,24 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
+body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width:100%;
+}
+
 .container {
+  position: relative;
   width: auto;
   max-width: 680px;
   padding: 0 15px;
+  height: 100%;
 }
+
+footer {
+  z-index:100;
+}
+
+#map { height: 100%; z-index:10;}
