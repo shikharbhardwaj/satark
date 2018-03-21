@@ -7,8 +7,11 @@ const app = express();
 // Set view folder.
 app.set('views', path.join(__dirname, 'views'));
 
-// Set static assets folder.
-app.use(express.static(path.join(__dirname, 'public')));
+// Set external static assets folder.
+app.use('/deps', express.static(path.join(__dirname, 'node_modules', '@bower_components')));
+
+// Set internal static assets folder.
+app.use('/assets', express.static(path.join(__dirname, 'public')));
 
 // Set the view engine.
 app.set('view engine', 'pug');
@@ -25,5 +28,5 @@ app.get('/analysis', function(req, res) {
 
 // Start server.
 app.listen(3000, function() {
-  console.log("Server started on port 3000");
-})
+  console.log('Server started on port 3000');
+});
