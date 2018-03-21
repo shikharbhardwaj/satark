@@ -2,29 +2,32 @@ doctype html
 
 html
   head
-    title Satark crime cap
-    link(rel='stylesheet' type='text/css' href="assets/main.css")
+    meta(charset='utf-8')
+    meta(http-equiv='x-ua-compatible', content='ie=edge')
+    title #{title}
+    meta(name='description', content='Realtime crime map and data analysis.')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    link(rel='apple-touch-icon', href='favicon.ico')
+    link(rel='favicon', href='favicon.ico')
+    link(rel='stylesheet' type='text/css' href="main.css")
     link(rel='stylesheet' type='text/css' href="deps/bootstrap/dist/css/bootstrap.css")
     link(rel='stylesheet' type='text/css' href="deps/leaflet/dist/leaflet.css")
 
   body
     nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
-      a.navbar-brand(href='#') Fixed navbar
+      a.navbar-brand(href='/') Satark
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarCollapse', aria-controls='navbarCollapse', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarCollapse.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
           li.nav-item.active
-            a.nav-link(href='#')
+            a.nav-link(href='/')
               | Home 
               span.sr-only (current)
-          li.nav-item
-            a.nav-link(href='#') Link
-          li.nav-item
-            a.nav-link.disabled(href='#') Disabled
-        form.form-inline.mt-2.mt-md-0
-          input.form-control.mr-sm-2(type='text', placeholder='Search', aria-label='Search')
-          button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+          li.nav-item.active
+            a.nav-link(href='/analytics')
+              | Analytics
+              span.sr-only (current)
 
     block content
 
@@ -33,4 +36,4 @@ html
         span.text-muted Place sticky footer content here.
 
   script(src="deps/leaflet/dist/leaflet.js")
-  script(src='assets/js/map.js')
+  script(src='js/map.js')
