@@ -6,10 +6,6 @@
   version "4.0.0"
   resolved "https://codeload.github.com/twbs/bootstrap/tar.gz/8a628b943cf31ca0a002c08af661a95772480225"
 
-"@bower_components/leaflet@Leaflet/Leaflet#^1.3.1":
-  version "1.3.1"
-  resolved "https://codeload.github.com/Leaflet/Leaflet/tar.gz/ba6f97fff8647e724e4dfe66d2ed7da11f908989"
-
 "@types/babel-types@*", "@types/babel-types@^7.0.0":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@types/babel-types/-/babel-types-7.0.1.tgz#1405e5396968c4302994b0161ce405b72b874257"

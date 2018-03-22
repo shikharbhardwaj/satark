@@ -1,8 +1,6 @@
-var mymap = L.map('map').setView([26.2006, 92.9376], 7.9);
+mapboxgl.accessToken = 'pk.eyJ1IjoiYmx1ZWZvZyIsImEiOiJjamIyOXF1bDY4ODM3MndxOGVhY2Nodmd2In0.GKakH77iZRIf1TJuhnKr5Q';
 
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-  maxZoom: 18,
-  id: 'mapbox.light',
-  accessToken: 'pk.eyJ1IjoiYmx1ZWZvZyIsImEiOiJjamIyOXF1bDY4ODM3MndxOGVhY2Nodmd2In0.GKakH77iZRIf1TJuhnKr5Q'
-}).addTo(mymap);
+let map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/bluefog/cjf2ymbkt5hom2rqxlvchqjwh'
+}).fitBounds([[89.25986090216082, 24.725585673509542], [99.27509720416606, 27.40083290150899]]);

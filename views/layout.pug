@@ -11,7 +11,9 @@ html
     link(rel='favicon', href='favicon.ico')
     link(rel='stylesheet' type='text/css' href="main.css")
     link(rel='stylesheet' type='text/css' href="deps/bootstrap/dist/css/bootstrap.css")
-    link(rel='stylesheet' type='text/css' href="deps/leaflet/dist/leaflet.css")
+    link(href='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css', rel='stylesheet')
+    script(src='https://code.jquery.com/jquery-3.3.1.min.js')
+    script(src='https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js')
 
   body
     nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
@@ -35,5 +37,4 @@ html
       .container
         span.text-muted Place sticky footer content here.
 
-  script(src="deps/leaflet/dist/leaflet.js")
-  script(src='js/map.js')
+
