@@ -1,9 +1,15 @@
-// const databaseName = 'passport_local_knex';
+const databaseName = 'satark_db';
 
 module.exports = {
   development: {
     client: 'postgresql',
-    connection: 'postgres://localhost:5432/satark_db',
+    connection: {
+      port: 5432,
+      host: 'localhost',
+      database: databaseName,
+      user: 'node_user',
+      password: process.env.DB_PASS,
+    },
     migrations: {
       directory: __dirname + '/src/server/db/migrations',
     },
@@ -13,7 +19,13 @@ module.exports = {
   },
   test: {
     client: 'postgresql',
-    connection: 'postgres://localhost:5432/satark_db_testing',
+    connection: {
+      port: 5432,
+      host: 'localhost',
+      database: databaseName,
+      user: 'node_user',
+      password: process.env.DB_PASS,
+    },
     migrations: {
       directory: __dirname + '/src/server/db/migrations',
     },
