@@ -34,20 +34,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Home route(crime map).
-app.get('/', function(req, res) {
-  res.render('home', {title: 'Satark'});
-});
+// App routes.
+const home = require('./routes/home');
+const analytics = require('./routes/analytics');
+const login = require('./routes/login');
 
-// Analytics route.
-app.get('/analytics', function(req, res) {
-  res.render('analysis', {title: 'Satark | Crime data analysis'});
-});
-
-// Admin route.
-app.get('/login', function(req, res) {
-  res.render('login', {title: 'Satark | Administrator login'});
-});
+app.use('/', home);
+app.use('/', analytics);
+app.use('/', login);
 
 // Start server.
 app.listen(3000, function() {
