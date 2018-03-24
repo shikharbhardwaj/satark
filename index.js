@@ -1,5 +1,9 @@
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const express = require('express');
 const path = require('path');
+const passport = require('passport');
+const session = require('express-session');
 
 // Initialize app.
 const app = express();
@@ -14,8 +18,21 @@ app.use('/deps', express.static(path.join(__dirname, 'node_modules',
 // Set internal static assets folder.
 app.use('/', express.static(path.join(__dirname, 'public')));
 
-// Set the view engine.
+// Middleware setup.
 app.set('view engine', 'pug');
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+// We'll use express-session to manage sessions.
+app.use(session({
+  secret: process.env.SECRET_KEY,
+  resave: false,
+  saveUninitialized: true,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Home route(crime map).
 app.get('/', function(req, res) {
