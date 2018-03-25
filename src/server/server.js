@@ -1,5 +1,4 @@
 (function() {
-
   'use strict';
 
   const app = require('./app');
@@ -50,5 +49,4 @@
     const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
     debug('Listening on ' + bind);
   }
-
 }());

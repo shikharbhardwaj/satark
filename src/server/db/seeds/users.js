@@ -8,7 +8,7 @@ exports.seed = (knex, Promise) => {
     return Promise.join(
       knex('users').insert({
         username: 'jeremy',
-        password: hash
+        password: hash,
       })
     );
   });

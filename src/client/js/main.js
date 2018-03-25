@@ -1,5 +1,3 @@
-(function () {
-
+(function() {
   console.log('sanity check!');
-
 })();

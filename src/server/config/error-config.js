@@ -1,11 +1,9 @@
-(function (errorConfig) {
-
+(function(errorConfig) {
   'use strict';
 
   // *** error handling *** //
 
-  errorConfig.init = function (app) {
-
+  errorConfig.init = function(app) {
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {
       const err = new Error('Not Found');
@@ -18,7 +16,7 @@
       app.use(function(err, req, res, next) {
         res.status(err.status || 500).send({
           message: err.message,
-          error: err
+          error: err,
         });
       });
     }
@@ -27,10 +25,8 @@
     app.use(function(err, req, res, next) {
       res.status(err.status || 500).send({
         message: err.message,
-        error: {}
+        error: {},
       });
     });
-
   };
-
 })(module.exports);

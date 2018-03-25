@@ -14,16 +14,16 @@ const server = require('tiny-lr')();
 const paths = {
   scripts: [
     path.join('src', '**', '*.js'),
-    path.join('src', '*.js')
+    path.join('src', '*.js'),
   ],
   styles: [
-    path.join('src', 'client', 'css', '*.css')
+    path.join('src', 'client', 'css', '*.css'),
   ],
   views: [
     path.join('src', 'server', '**', '*.html'),
-    path.join('src', 'server', '*.html')
+    path.join('src', 'server', '*.html'),
   ],
-  server: path.join('src', 'server', 'server.js')
+  server: path.join('src', 'server', 'server.js'),
 };
 
 const lrPort = 35729;
@@ -33,8 +33,8 @@ const nodemonConfig = {
   ext: 'html js css',
   ignore: ['node_modules'],
   env: {
-    NODE_ENV: 'development'
-  }
+    NODE_ENV: 'development',
+  },
 };
 
 // *** default task *** //
@@ -55,7 +55,7 @@ gulp.task('jshint', () => {
   return gulp.src(paths.scripts)
     .pipe(plumber())
     .pipe(jshint({
-      esnext: true
+      esnext: true,
     }))
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'));
