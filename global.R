@@ -31,8 +31,9 @@ assamTibble<-as_tibble(assam)
 assamDistricts<-as.character(assamTibble$DISTRICT)
 crimeDistricts <-sample( assamDistricts, 446, replace=TRUE)
 crimeData<-cbind(crimeData,crimeDistricts)
-selectAssamDistric<-crimeData$crimeDistricts
-selectAssamDistricts<-rbind("All Districts",assamDistricts)#For selectInput 
+
+selectAssamDistric<-crimeData$crimeDistricts #For selectInput 
+selectAssamDistricts<-rbind("All Districts",assamDistricts)
 
 #Preparing Assam Shape File
 assam <- geojsonio::geojson_read("2011_Dist.json",
