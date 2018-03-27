@@ -26,6 +26,13 @@ dates<-sample(seq(as.Date('2017/01/01'), as.Date('2018/01/01'), by="day"), 446,r
 crimeData<-cbind(crimeData,dates)
 crimeData<-crimeData[,-c(1)]
 
+#Generating random districts for crime data
+assamTibble<-as_tibble(assam)
+assamDistricts<-as.character(assamTibble$DISTRICT)
+crimeDistricts <-sample( assamDistricts, 446, replace=TRUE)
+crimeData<-cbind(crimeData,crimeDistricts)
+selectAssamDistric<-crimeData$crimeDistricts
+selectAssamDistricts<-rbind("All Districts",assamDistricts)#For selectInput 
 
 #Preparing Assam Shape File
 assam <- geojsonio::geojson_read("2011_Dist.json",

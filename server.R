@@ -12,11 +12,19 @@ library(shiny)
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
   
+  districtFilter <- reactive({
+    if (input$district=="All Crimes"){
+      districtFilterData<-crimeData
+    } else{
+      districtFilterData<-crimeData[crimeData$crimeDistricts==input$district,]}
+  })
+  
   crimeFilter <- reactive({
     if (input$crimeType=="All Crimes"){
-    crimeFilterData<-crimeData
+    crimeFilterData<-districtFilter()
     } else{
-    crimeFilterData<-crimeData[crimeData$Crime.type==input$crimeType,]}
+    crimeFilterData<-districtFilter()
+    crimeFilterData<-crimeFilterData[crimeFilterData$Crime.type==input$crimeType,]}
   })
   
   dateFilter<-reactive({
@@ -41,9 +49,12 @@ shinyServer(function(input, output) {
   
   
   output$pinpointMap <- renderLeaflet({
-    
-    assam_leaflet %>%
+      assam_leaflet %>%
       addMarkers(data = dateFilter(),~lng, ~lat,  popup= popupTable(dateFilter()))
   })
+  
+  #output$summary <- renderTable({
+   # summary <- table(dateFilter())
+#  })
   
 })

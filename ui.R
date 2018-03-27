@@ -19,6 +19,8 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
       
+      selectInput(inputId="district", label="District",
+                  choices=selectAssamDistricts, selected = selectAssamDistricts),
       selectInput(inputId="crimeType", label="Crime Type",
                   choices=crime_names, selected = crime_names),
       dateRangeInput('dateRange',
@@ -32,7 +34,8 @@ shinyUI(fluidPage(
     
     # Show a plot of the generated distribution
     mainPanel(
-      leafletOutput("pinpointMap")
+      leafletOutput("pinpointMap"),
+      tableOutput("summary")
     )
   )
 ))
