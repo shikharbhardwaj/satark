@@ -1,9 +1,18 @@
-const databaseName = 'passport_local_knex';
+require('dotenv').config();
+
+const databaseName = 'satark';
+const pass = process.env.DB_PASS;
 
 module.exports = {
   development: {
     client: 'postgresql',
-    connection: `postgres://localhost:5432/${databaseName}`,
+    connection: {
+      port: 5432,
+      host: 'localhost',
+      database: databaseName,
+      user: 'satark',
+      password: pass,
+    },
     migrations: {
       directory: __dirname + '/src/server/db/migrations'
     },
@@ -13,12 +22,18 @@ module.exports = {
   },
   test: {
     client: 'postgresql',
-    connection: `postgres://localhost:5432/${databaseName}_test`,
+    connection: {
+      port: 5432,
+      host: 'localhost',
+      database: 'passport_test',
+      user: 'satark',
+      password: pass,
+    },
     migrations: {
       directory: __dirname + '/src/server/db/migrations'
     },
     seeds: {
       directory: __dirname + '/src/server/db/seeds'
     }
-  }
+  },
 };
