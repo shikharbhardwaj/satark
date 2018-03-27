@@ -13,7 +13,10 @@ library(shiny)
 shinyServer(function(input, output) {
   
   crimeFilter <- reactive({
-    crimeFilterData<-crimeData[crimeData$Crime.type==input$crimeType,]
+    if (input$crimeType=="All Crimes"){
+    crimeFilterData<-crimeData
+    } else{
+    crimeFilterData<-crimeData[crimeData$Crime.type==input$crimeType,]}
   })
   
   dateFilter<-reactive({

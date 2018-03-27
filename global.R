@@ -19,6 +19,7 @@ lng <-runif(446,90.0000,95.5000)
 crimeData<-cbind(crimedata,lat,lng)
 crimeData<-crimeData[,-c(2,3)]
 crime_names<-as.character(unique(crimeData$Crime.type))
+crime_names<-rbind("All Crimes",crime_names)
 
 #Generating random dates and replacing with london dates
 dates<-sample(seq(as.Date('2017/01/01'), as.Date('2018/01/01'), by="day"), 446,replace=TRUE)

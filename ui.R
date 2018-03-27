@@ -20,7 +20,7 @@ shinyUI(fluidPage(
     sidebarPanel(
       
       selectInput(inputId="crimeType", label="Crime Type",
-                  choices=crime_names, selected = "Bicycle theft"),
+                  choices=crime_names, selected = crime_names),
       dateRangeInput('dateRange',
                      label = 'Date Range',
                      start = Sys.Date() - 3, end = Sys.Date() + 3,
