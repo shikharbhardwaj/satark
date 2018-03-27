@@ -1,9 +1,9 @@
 #
-# This is the server logic of a Shiny web application. You can run the 
+# This is the server logic of a Shiny web application. You can run the
 # application by clicking 'Run App' above.
 #
 # Find out more about building applications with Shiny here:
-# 
+#
 #    http://shiny.rstudio.com/
 #
 
@@ -11,19 +11,36 @@ library(shiny)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
+  
+  crimeFilter <- reactive({
+    crimeFilterData<-crimeData[crimeData$Crime.type==input$crimeType,]
+  })
+  
+  dateFilter<-reactive({
+    dateFilterData<-crimeFilter()
+    dateFilterData<-dateFilterData[dateFilterData$dates >= input$dateRange[1] & dateFilterData$dates<=input$dateRange[2],]
+  })
+  
+  
+  # crime<- reactive({
+  #  a <- crimeData[crimeData$Crime.type==input$crimeType,]
+  #  return(a)
+  #})
+  
+  
+  #crime <- reactive({
+  # date_filter_data <- crimeData[crimeData$dates >= input$dateRange[1] & crimeData$dates <= input$dateRange[2],]
+  #return (date_filter_data)
+  
+  #})
+  
+  
+  
+  
+  output$pinpointMap <- renderLeaflet({
     
-    crime<- reactive({
-      a <- crimedata1[crimedata1$Crime.type==input$crimeType,]
-      return(a)
-    })
-    
-    output$pinpointMap <- renderLeaflet({
-      assam_leaflet %>% 
-        addMarkers(~lng, ~lat,  popup= popupTable(crime()))
-    }
-  )
-    })
+    assam_leaflet %>%
+      addMarkers(data = dateFilter(),~lng, ~lat,  popup= popupTable(dateFilter()))
+  })
   
-  
-     
-  
+})

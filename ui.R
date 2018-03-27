@@ -3,7 +3,7 @@
 # run the application by clicking 'Run App' above.
 #
 # Find out more about building applications with Shiny here:
-# 
+#
 #    http://shiny.rstudio.com/
 #
 
@@ -15,11 +15,18 @@ shinyUI(fluidPage(
   # Application title
   titlePanel("SATARK"),
   
-  # Sidebar with a slider input for number of bins 
+  # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-      selectInput(inputId="crimeType", label="Crime Type", choices=crime_names, selected = "Bicycle theft")
       
+      selectInput(inputId="crimeType", label="Crime Type",
+                  choices=crime_names, selected = "Bicycle theft"),
+      dateRangeInput('dateRange',
+                     label = 'Date Range',
+                     start = Sys.Date() - 3, end = Sys.Date() + 3,
+                     min = Sys.Date() - 700, max = Sys.Date(),
+                     separator = " - ", format = "dd/mm/yy",
+                     startview = 'year', weekstart = 1)
       
     ),
     
