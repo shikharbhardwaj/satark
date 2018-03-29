@@ -27,7 +27,7 @@ shinyServer(function(input, output,session) {
     } else{
     #crimeFilterData<-districtFilter()
     #crimeFilterData<-crimeFilterData[crimeFilterData$Crime.type==input$crimeType,]}
-      crimeFilterData<-crimeData[crimeData$Crime.type==input$crimeType,]}
+      crimeFilterData<-crimeData[crimeData$crimeType==input$crimeType,]}
   })
   
   dateFilter<-reactive({
@@ -59,7 +59,7 @@ shinyServer(function(input, output,session) {
     if (input$crimeTypeAnalytics=="All Crimes"){
       crimeFilterAnalytics<-crimeData
     } else{
-      crimeFilterAnalytics<-crimeData[crimeData$Crime.type==input$crimeTypeAnalytics,]}
+      crimeFilterAnalytics<-crimeData[crimeData$crimeType==input$crimeTypeAnalytics,]}
   })
   
   dateFilterAnalytics<-reactive({
@@ -70,16 +70,17 @@ shinyServer(function(input, output,session) {
   #Pie Plot in Tab 2
    output$piePlot <- renderPlotly({
   district_date<-inner_join(districtFilterAnalytics(),dateFilterAnalytics())
-  piecrimeCount<-count(district_date, vars=c("Crime.type"))
-  plot_ly(piecrimeCount, labels = ~Crime.type, values=~freq,type = 'pie') 
+  piecrimeCount<-count(district_date, vars=c("crimeType"))
+  plot_ly(piecrimeCount, labels = ~crimeType, values=~freq,type = 'pie') 
   
  })
   
+   #District Comparator in Tab 2
   crimeComparatorType<-reactive({
   
   crime_date<-inner_join(crimeFilterAnalytics(),dateFilterAnalytics())
-  crimeCount<-count(dateFilterAnalytics(), vars=c("crimeDistricts" , "Crime.type"))
-  crimeSpread<-spread(crimeCount,Crime.type,freq)
+  crimeCount<-count(dateFilterAnalytics(), vars=c("crimeDistricts" , "crimeType"))
+  crimeSpread<-spread(crimeCount,crimeType,freq)
   crimeSpread[is.na(crimeSpread)] <- 0
   rownames(crimeSpread)<-crimeSpread[,1]
   crimeSpread<-crimeSpread[,-1]
@@ -91,16 +92,27 @@ shinyServer(function(input, output,session) {
   })
 
   
-  output$districtComparatorPlot <- renderPlot({
-    crimeComparatorType<-crimeComparatorType()
-    barplot(crimeComparatorType,names.arg=assamDistricts)
+  #output$districtComparatorPlot <- renderPlot({
+   # crimeComparatorType<-crimeComparatorType()
+    #barplot(crimeComparatorType,names.arg=assamDistricts)
    # plot_ly(assamDistricts, crimeComparatorType, type = "bar")
-  })
+  #})
     
     
   
+  
+  output$trendPlot <- renderPlotly({
+    crime_district<-inner_join(districtFilterAnalytics(),crimeFilterAnalytics())
+    crime_date<-inner_join(crimeFilterAnalytics(),dateFilterAnalytics())
+    crime_date_district<-inner_join(crime_date,districtFilterAnalytics())
+    dateTrendCount<-count(crime_date_district,vars=c("dates"))
     
-    
+    dateTrend <- dateTrendCount$dates
+    freqTrend <- dateTrendCount$freq
+    plot_ly(x = ~dateTrend, y = ~freqTrend,type = 'scatter', mode = 'lines')
+
+  })
+  
     
   })
 

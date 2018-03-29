@@ -50,7 +50,7 @@ shinyUI(fluidPage(
                                choices=selectAssamDistricts, selected = "All Districts"),
                    
                    selectInput(inputId="crimeTypeAnalytics", label="Crime Type",
-                               choices=crimeSpreadNames,selected="All_Crimes"),
+                               choices=crime_names,selected="All_Crimes"),
                    
                   dateRangeInput('dateRangeAnalytics',
                                   label = 'Date Range',
@@ -61,8 +61,8 @@ shinyUI(fluidPage(
                  
                  mainPanel(
                    plotlyOutput("piePlot"),
-                   
-                   plotOutput("districtComparatorPlot")
+                   #plotOutput("districtComparatorPlot"),
+                   plotlyOutput("trendPlot")
                  )
                  
                  

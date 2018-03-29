@@ -10,23 +10,26 @@ library(mapview)    # quick interactive viewing of spatial objects
 library(leaflet)
 
 #Synthesizing Random Data
-lon_crime<-read.csv("lon_crime.csv")
-crimedata<- lon_crime[, c("Month", "Longitude", "Latitude", "Crime.type")]
-
+#lon_crime<-read.csv("lon_crime.csv")
+#crimedata<- lon_crime[, c("Month", "Longitude", "Latitude", "Crime.type")]
+crimeData<-read.csv("crimeData.csv")
+crimeData<-crimeData[,-1]
+crimeData$dates<-as.Date(crimeData$dates)
+colnames(crimeData)<-c("crimeType","lat","lng","dates","crimeDistricts")
 #Generating Random coordinates for Assam
-lat <- runif(446, 26.0000, 27.0000)
-lng <-runif(446,90.0000,95.5000)
+#lat <- runif(446, 26.0000, 27.0000)
+#lng <-runif(446,90.0000,95.5000)
 
 #Replacing london coordinates dates with Assam dates
-crimeData<-cbind(crimedata,lat,lng)
-crimeData<-crimeData[,-c(2,3)]
-crime_names<-as.character(unique(crimeData$Crime.type))
+#crimeData<-cbind(crimedata,lat,lng)
+#crimeData<-crimeData[,-c(2,3)]
+crime_names<-as.character(unique(crimeData$crimeType))
 crime_names<-c("All Crimes",crime_names)
 
 #Generating random dates and replacing with london dates
-dates<-sample(seq(as.Date('2017/01/01'), as.Date('2018/01/01'), by="day"), 446,replace=TRUE)
-crimeData<-cbind(crimeData,dates)
-crimeData<-crimeData[,-c(1)]
+#dates<-sample(seq(as.Date('2017/01/01'), as.Date('2018/01/01'), by="day"), 446,replace=TRUE)
+#crimeData<-cbind(crimeData,dates)
+#crimeData<-crimeData[,-c(1)]
 
 #Generating random districts for crime data
 assam <- geojsonio::geojson_read("2011_Dist.json",
@@ -35,8 +38,8 @@ assam <- geojsonio::geojson_read("2011_Dist.json",
 assamTibble<-as_tibble(assam)
 assamDistricts<-as.character(assamTibble$DISTRICT)
 
-crimeDistricts <-sample( assamDistricts, 446, replace=TRUE)
-crimeData<-cbind(crimeData,crimeDistricts)
+#crimeDistricts <-sample( assamDistricts, 446, replace=TRUE)
+#crimeData<-cbind(crimeData,crimeDistricts)
 selectAssamDistricts<-c("All Districts",assamDistricts)
 #assamDistricts<-as.data.frame(assamDistricts)
 
