@@ -1,0 +1,86 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+  <!-- <h2>Modal Signup Form</h2>
+ -->
+  <div id="main-container" class="uigridcontainer">
+    <!-- Login Container -->
+    <div class="sixteen wide mobile eight wide computer column">
+      <div id="login-container" class="ui container">
+        <!-- Login Heading -->
+        <h1 class="header">Administrator login</h1>
+        <!-- Login Form -->
+        <form action="auth/login" method="POST" class="ui form">
+          <div class="field">
+            <label for="username">Username: </label>
+            <input type="text" id="login-username" name="username" required="">
+          </div>
+          <div class="field">
+            <label for="password">Password: </label>
+            <input type="password" id="login-password" name="password" required="">
+          </div>
+          <button class="ui primary button">Login</button>
+        </form>
+        <!-- Login Form End -->
+      </div>
+    </div>
+    <br>
+    <br>
+    <!-- <div class="center">
+      <h3>New User? </h3>
+      <button onclick="document.getElementById(&#39;id01&#39;).style.display=&#39;block&#39;" style="width:auto;">Sign Up</button>
+    </div> -->
+    <!-- <div id="id01" class="modal">
+      <form class="modal-content" action="file:///F:/action_page.php">
+        <div class="modal-dialog">
+          <i onclick="document.getElementById(&#39;id01&#39;).style.display=&#39;none&#39;"
+          class="fa fa-close" title="Close Modal" id = "close-cross"></i>
+          <h1>Sign Up</h1>
+          <p>Please fill in this form to create an account.</p>
+          <hr>
+          <label for="username">Username: </label>
+          <input type="text" id="signup-username" name="username" required="" autocomplete="username">
+          <label for="password">Password: </label>
+          <input type="password" id="signup-password" name="password" required="" autocomplete="current-password"> -->
+
+          <!-- <div class="field"> -->
+          <!-- <label for="password">Re-enter Password: </label>
+          <input type="password" id="signup-password" name="password" required=""> -->
+
+          <!-- <div class="Police Station Name"> -->
+          <!-- <label for="">Police Station: </label> -->
+          <!--<input type="text" id="name" name="name" required>-->
+          <!-- <br>
+          <select>
+            <option value="None" selected=""> </option>
+            <option value="Dispur"> Dispur</option>
+            <option value="Guwahati"> Guwahati</option>
+            <option value="Basistha"> Basistha</option>
+          </select>
+          <br>
+          <br> -->
+
+          <!-- <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me -->
+
+          <!-- <div class="clearfix">
+            <button type="button" onclick="document.getElementById(&#39;id01&#39;).style.display=&#39;none&#39;" class="cancelbtn">Cancel</button>
+            <button type="submit" class="signupbtn">Sign Up</button>
+          </div> -->
+        <!-- </div> -->
+      <!-- </form> -->
+    <!-- </div> -->
+
+    <script>
+      // Get the modal
+      var modal = document.getElementById('id01');
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    </script>
+</div>
+{% endblock %}
