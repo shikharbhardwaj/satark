@@ -34,10 +34,11 @@ assam <- geojsonio::geojson_read("2011_Dist.json",
 
 assamTibble<-as_tibble(assam)
 assamDistricts<-as.character(assamTibble$DISTRICT)
+
 crimeDistricts <-sample( assamDistricts, 446, replace=TRUE)
 crimeData<-cbind(crimeData,crimeDistricts)
 selectAssamDistricts<-c("All Districts",assamDistricts)
-
+#assamDistricts<-as.data.frame(assamDistricts)
 
 #Preparing Assam Shape File
 assam <- geojsonio::geojson_read("2011_Dist.json",

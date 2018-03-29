@@ -47,7 +47,7 @@ shinyUI(fluidPage(
                  sidebarPanel(
                    
                   selectInput(inputId="districtAnalytics", label="District",
-                               choices=selectAssamDistricts, selected = "Dibrugah"),
+                               choices=selectAssamDistricts, selected = "All Districts"),
                    
                    selectInput(inputId="crimeTypeAnalytics", label="Crime Type",
                                choices=crimeSpreadNames,selected="All_Crimes"),
@@ -60,8 +60,8 @@ shinyUI(fluidPage(
                                   startview = 'year', weekstart = 1)),
                  
                  mainPanel(
-                   plotOutput("piePlot"),
-                   textOutput("Result"),
+                   plotlyOutput("piePlot"),
+                   
                    plotOutput("districtComparatorPlot")
                  )
                  

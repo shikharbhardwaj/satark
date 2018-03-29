@@ -68,9 +68,10 @@ shinyServer(function(input, output,session) {
   })
   
   #Pie Plot in Tab 2
-  output$piePlot <- renderPlot({
+   output$piePlot <- renderPlotly({
   district_date<-inner_join(districtFilterAnalytics(),dateFilterAnalytics())
-  pie(table(district_date$Crime.type))
+  piecrimeCount<-count(district_date, vars=c("Crime.type"))
+  plot_ly(piecrimeCount, labels = ~Crime.type, values=~freq,type = 'pie') 
   
  })
   
@@ -92,7 +93,8 @@ shinyServer(function(input, output,session) {
   
   output$districtComparatorPlot <- renderPlot({
     crimeComparatorType<-crimeComparatorType()
-    barplot(crimeComparatorType)
+    barplot(crimeComparatorType,names.arg=assamDistricts)
+   # plot_ly(assamDistricts, crimeComparatorType, type = "bar")
   })
     
     
