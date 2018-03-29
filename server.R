@@ -37,7 +37,7 @@ shinyServer(function(input, output,session) {
   
   })
   
-#Beg of Tab 1 (Crime Map)  
+ 
   output$pinpointMap <- renderLeaflet({
     district_crime<-inner_join(districtFilter(),crimeFilter())
     district_crime_date<-inner_join(district_crime,dateFilter())
@@ -48,14 +48,62 @@ shinyServer(function(input, output,session) {
   #######################
 
 #Beg of Tab 2(Analytics)
+  districtFilterAnalytics <- reactive({
+    if (input$districtAnalytics=="All Districts"){
+      districtFilterAnalytics<-crimeData
+    } else{
+      districtFilterAnalytics<-crimeData[crimeData$crimeDistricts==input$districtAnalytics,]}
+  })
   
+  crimeFilterAnalytics <- reactive({
+    if (input$crimeTypeAnalytics=="All Crimes"){
+      crimeFilterAnalytics<-crimeData
+    } else{
+      crimeFilterAnalytics<-crimeData[crimeData$Crime.type==input$crimeTypeAnalytics,]}
+  })
+  
+  dateFilterAnalytics<-reactive({
+    dateFilterAnalytics<-crimeData[crimeData$dates >= input$dateRangeAnalytics[1] & crimeData$dates<=input$dateRangeAnalytics[2],]
+    
+  })
+  
+  #Pie Plot in Tab 2
   output$piePlot <- renderPlot({
-  district_date<-inner_join(districtFilter(),dateFilter())
- pie(table(district_date$Crime.type))
+  district_date<-inner_join(districtFilterAnalytics(),dateFilterAnalytics())
+  pie(table(district_date$Crime.type))
+  
+ })
+  
+  crimeComparatorType<-reactive({
+  
+  crime_date<-inner_join(crimeFilterAnalytics(),dateFilterAnalytics())
+  crimeCount<-count(dateFilterAnalytics(), vars=c("crimeDistricts" , "Crime.type"))
+  crimeSpread<-spread(crimeCount,Crime.type,freq)
+  crimeSpread[is.na(crimeSpread)] <- 0
+  rownames(crimeSpread)<-crimeSpread[,1]
+  crimeSpread<-crimeSpread[,-1]
+  crimeSpread$All<-rowSums(crimeSpread)
+  colnames(crimeSpread)<-crimeSpreadNames
+  crimeTypeVector<-crimeSpread[,input$crimeTypeAnalytics]
+  return(crimeTypeVector)
+  
+  })
+
+  
+  output$districtComparatorPlot <- renderPlot({
+    crimeComparatorType<-crimeComparatorType()
+    barplot(crimeComparatorType)
+  })
+    
+    
+  
+    
+    
+    
   })
 
       #End of Tab 2(Analytics)  
   
   
   
-})
+

@@ -1,6 +1,8 @@
 library(tidyr)  # loads dplyr, tidyr, ggplot2 packages
 library(dplyr)
+library(plyr)       # for aggregate
 library(ggplot2)
+library(gridExtra)  # plotting multiple plots together
 library(sf)         # simple features package - vector
 library(raster)     # raster
 library(plotly)     # makes ggplot objects interactive
@@ -19,7 +21,7 @@ lng <-runif(446,90.0000,95.5000)
 crimeData<-cbind(crimedata,lat,lng)
 crimeData<-crimeData[,-c(2,3)]
 crime_names<-as.character(unique(crimeData$Crime.type))
-crime_names<-rbind("All Crimes",crime_names)
+crime_names<-c("All Crimes",crime_names)
 
 #Generating random dates and replacing with london dates
 dates<-sample(seq(as.Date('2017/01/01'), as.Date('2018/01/01'), by="day"), 446,replace=TRUE)
@@ -27,13 +29,15 @@ crimeData<-cbind(crimeData,dates)
 crimeData<-crimeData[,-c(1)]
 
 #Generating random districts for crime data
+assam <- geojsonio::geojson_read("2011_Dist.json",
+                                 what = "sp") 
+
 assamTibble<-as_tibble(assam)
 assamDistricts<-as.character(assamTibble$DISTRICT)
 crimeDistricts <-sample( assamDistricts, 446, replace=TRUE)
 crimeData<-cbind(crimeData,crimeDistricts)
+selectAssamDistricts<-c("All Districts",assamDistricts)
 
-selectAssamDistric<-crimeData$crimeDistricts #For selectInput 
-selectAssamDistricts<-rbind("All Districts",assamDistricts)
 
 #Preparing Assam Shape File
 assam <- geojsonio::geojson_read("2011_Dist.json",
@@ -44,3 +48,10 @@ assam_leaflet<-leaflet(assam) %>% addTiles() %>%
               opacity = 1.0, fillOpacity = 0.5,
               highlightOptions = highlightOptions(color = "white", weight = 2,
                                                   bringToFront = TRUE))
+
+#Column names for District Comparator Spread Data
+
+crimeSpreadNames<-c("Anti_Social_Behaviour","Bicycle_Theft","Burgalary",
+                    "Criminal_Damage/Arson","Drugs","Other_Crime","Other_Theft","Robbery",
+                    "Weapon_Possession","Public_Order","Shoplifitng","Theft",
+                    "Vehicle_Crime","Sexual_Offences","All_Crimes")
