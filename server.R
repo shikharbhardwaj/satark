@@ -120,15 +120,16 @@ shinyServer(function(input, output,session) {
   piecrimeCount<-count(district_date, vars=c("crimetype"))
   plot_ly(piecrimeCount, labels = ~crimetype, values=~freq,type = 'pie') %>% 
     layout(title = 'Crime - Pie chart ',showlegend=T) 
-     }else if(analyticsType()=="Crime Trend Plot")
+     }else if(analyticsType()=="Compare all districts")
      {
        crime_date<-inner_join(crimeFilterAnalytics(),dateFilterAnalytics())
        districtComparatorData<-count(crime_date,vars=c("crimedistricts","crimetype"))
        plot_ly(districtComparatorData, x = ~crimedistricts, y = ~freq, type = 'bar', 
                name = ~crimetype, color = ~crimetype) %>%
-         layout(title="Compare all districts",xaxis=list(title='Districts'), yaxis =list(title='Number of Crimes'),barmode = 'stack')
-       
-     } else{
+         layout(title="Compare all districts",xaxis=list(title='Districts'),
+                yaxis =list(title='Number of Crimes'),barmode = 'stack',
+                margin = list(b = 160), xaxis = list(tickangle = 45))
+        } else{
        crime_date<-inner_join(crimeFilterAnalytics(),dateFilterAnalytics())
        crime_date_district<-inner_join(crime_date,districtFilterAnalytics())
        dateTrendCount<-count(crime_date_district,vars=c("dates"))

@@ -56,8 +56,6 @@ shinyUI(fluidPage(
                  
                  mainPanel(
                    plotlyOutput("analyticsPlot")
-                   #plotlyOutput("districtComparatorPlot"),
-                   #plotlyOutput("trendPlot")
                  )
                  
   ),
