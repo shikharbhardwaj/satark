@@ -31,13 +31,52 @@ shinyServer(function(input, output,session) {
     dateFilterData<-crimeData[crimeData$dates >= input$dateRange[1] & crimeData$dates<=input$dateRange[2],]
   
   })
+  mapType<-reactive({
+    input$mapType
+  })
+  
   
   output$Map <- renderLeaflet({
+    
+    if(mapType()=="Crime Map"){
     district_crime<-inner_join(districtFilter(),crimeFilter())
     district_crime_date<-inner_join(district_crime,dateFilter())
       assam_leaflet %>%
       addMarkers(data = district_crime_date,~lng, ~lat,  popup= popupTable(district_crime_date))
-  })
+    }else{
+      districtCount<-count(crimeData,vars=c("crimeDistricts"))
+      bins <- c(0,3,6,9, 12, 15, 18, 21, 24,27,30,Inf)
+      pal <- colorBin("YlOrRd", domain = districtCount$freq, bins = bins)
+  
+      labels <- sprintf(
+        "<strong>%s</strong><br/>%s Crimes",
+        assam$DISTRICT, districtCount$freq
+      ) %>% lapply(htmltools::HTML)
+      
+      assam_leaflet %>% addPolygons(
+        fillColor = ~pal(districtCount$freq),
+        weight = 2,
+        
+        opacity = 1,
+        
+        dashArray = "3",
+        
+        color = "white",
+        fillOpacity = 0.7,
+        highlight = highlightOptions(
+          weight = 5,
+          color = "#666",
+          bringToFront = TRUE),
+        label = labels,
+        
+      ) %>% setView(92.9376,26.2006, zoom = 6.5)
+      
+      
+      
+    }
+    
+       })
+  
     
   
     

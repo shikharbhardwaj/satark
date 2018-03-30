@@ -8,11 +8,12 @@ library(raster)     # raster
 library(plotly)     # makes ggplot objects interactive
 library(mapview)    # quick interactive viewing of spatial objects
 library(leaflet)
+library(leaflet.extras) #For heatmaps
 
 #Synthesizing Random Data
-#lon_crime<-read.csv("lon_crime.csv")
-#crimedata<- lon_crime[, c("Month", "Longitude", "Latitude", "Crime.type")]
+
 crimeData<-read.csv("crimeData.csv")
+#colnames(crimeData)<-c("crimetype","crimedistricts","")
 crimeData<-crimeData[,-1]
 crimeData$dates<-as.Date(crimeData$dates)
 colnames(crimeData)<-c("crimeType","lat","lng","dates","crimeDistricts")
