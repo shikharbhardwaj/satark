@@ -6,9 +6,7 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-
 function fill_location(latLng, address) {
-  console.log('Selected Geolocation : ', latLng, ' has address ', address);
   $('#lat_show').val(latLng.lat);
   $('#lng_show').val(latLng.lng);
   $('#formatted_address').val(address);
@@ -31,7 +29,7 @@ function initAutocomplete() {
 
   var geocodeLatLng = function(latLng) {
     return new Promise(function (resolve, reject) {
-      geocoder.geocode({ 'location': latLng }, function (results, status) {
+      geocoder.geocode({ location: latLng }, function (results, status) {
         var address = '';
         if (status === 'OK') {
           if (results[0]) {

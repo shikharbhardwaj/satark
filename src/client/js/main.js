@@ -1,7 +1,7 @@
 function notify(message) {
   $('#notification_box').text(message);
   $('#notification_box').fadeIn('slow').promise().done(() => {
-    setTimeout(() => { $('#notification_box').fadeOut('slow') }, 2000);
+    setTimeout(() => { $('#notification_box').fadeOut('slow'); }, 2000);
   });
 }
 $(document).ready(function () {
@@ -23,5 +23,7 @@ $(document).ready(function () {
     modal.style.display = 'none';
     overlay.style.display = 'none';
   });
-  $('#datetimepicker1').datetimepicker();
+  $('#datetimepicker1').datetimepicker({
+    format: 'DD-MM-YYYY HH:mm',
+  });
 });
