@@ -50,7 +50,7 @@ assam <- geojsonio::geojson_read("2011_Dist.json",
 assam_leaflet<-leaflet(assam) %>% addTiles() %>%
   addPolygons(color = "#444444", weight = 1, smoothFactor = 0.5,
               opacity = 1.0, fillOpacity = 0.5,
-              highlightOptions = highlightOptions(color = "white", weight = 2,
+              highlightOptions = highlightOptions(color = "black", weight = 2,
                                                   bringToFront = TRUE))
 
 #Column names for District Comparator Spread Data

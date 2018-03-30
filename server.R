@@ -22,28 +22,26 @@ shinyServer(function(input, output,session) {
   
   crimeFilter <- reactive({
     if (input$crimeType=="All Crimes"){
-    #crimeFilterData<-districtFilter()
       crimeFilterData<-crimeData
     } else{
-    #crimeFilterData<-districtFilter()
-    #crimeFilterData<-crimeFilterData[crimeFilterData$Crime.type==input$crimeType,]}
       crimeFilterData<-crimeData[crimeData$crimeType==input$crimeType,]}
   })
   
   dateFilter<-reactive({
-    #dateFilterData<-crimeFilter()
-    #dateFilterData<-dateFilterData[dateFilterData$dates >= input$dateRange[1] & dateFilterData$dates<=input$dateRange[2],]
     dateFilterData<-crimeData[crimeData$dates >= input$dateRange[1] & crimeData$dates<=input$dateRange[2],]
   
   })
   
- 
-  output$pinpointMap <- renderLeaflet({
+  output$Map <- renderLeaflet({
     district_crime<-inner_join(districtFilter(),crimeFilter())
     district_crime_date<-inner_join(district_crime,dateFilter())
       assam_leaflet %>%
       addMarkers(data = district_crime_date,~lng, ~lat,  popup= popupTable(district_crime_date))
   })
+    
+  
+    
+  
 #End of Tab 1 (Crime Map)
   #######################
 

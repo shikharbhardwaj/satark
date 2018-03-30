@@ -21,13 +21,14 @@ shinyUI(fluidPage(
     tabPanel("Crime Map",
              
              sidebarPanel(
+               selectInput(inputId="mapType", label="Map Type",
+                           choices=c("Crime Map","Crime Choropleth","Heat Map"), selected = "Crime Maps"),
+               
                selectInput(inputId="district", label="District",
                            choices=selectAssamDistricts, selected = "All Districts"),
                
                selectInput(inputId="crimeType", label="Crime Type",
                            choices=crime_names,selected="All Crimes"),
-               #Bicycle Theft is the wrong spelling of Bicycle Theft. 
-               #Done here for purposes of selecting All crimes by default
                dateRangeInput('dateRange',
                               label = 'Date Range',
                               start = Sys.Date() -365, end = Sys.Date(),
@@ -36,7 +37,7 @@ shinyUI(fluidPage(
                               startview = 'year', weekstart = 1)),     
              
         mainPanel(
-        leafletOutput("pinpointMap")
+        leafletOutput("Map")
                  )
   
 ),
