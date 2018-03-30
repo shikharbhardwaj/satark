@@ -31,10 +31,11 @@ shinyServer(function(input, output,session) {
     dateFilterData<-crimeData[crimeData$dates >= input$dateRange[1] & crimeData$dates<=input$dateRange[2],]
   
   })
+  
   mapType<-reactive({
     input$mapType
   })
-  
+
   
   output$Map <- renderLeaflet({
     
@@ -106,66 +107,43 @@ shinyServer(function(input, output,session) {
     
   })
   
-  # (1) Pie Plot
-   output$piePlot <- renderPlotly({
+  analyticsType<-reactive({
+    input$analyticsType
+  })
+  
+  
+  
+   output$analyticsPlot <- renderPlotly({
+     # (1) Pie Plot   
+     if(analyticsType()=="Crime Pie Chart"){
   district_date<-inner_join(districtFilterAnalytics(),dateFilterAnalytics())
   piecrimeCount<-count(district_date, vars=c("crimetype"))
   plot_ly(piecrimeCount, labels = ~crimetype, values=~freq,type = 'pie') %>% 
     layout(title = 'Crime - Pie chart ',showlegend=T) 
-  
-  
- })
-  
-   #District Comparator in Tab 2
-  #crimeComparatorType<-reactive({
-  
-  #crime_date<-inner_join(crimeFilterAnalytics(),dateFilterAnalytics())
-  #crimeCount<-count(dateFilterAnalytics(), vars=c("crimedistricts" , "crimetype"))
-  #crimeSpread<-spread(crimeCount,crimetype,freq)
-  #crimeSpread[is.na(crimeSpread)] <- 0
-  #rownames(crimeSpread)<-crimeSpread[,1]
-  #crimeSpread<-crimeSpread[,-1]
-  #crimeSpread$All<-rowSums(crimeSpread)
-  #colnames(crimeSpread)<-crime_names
-  #crimeTypeVector<-crimeSpread[,input$crimeTypeAnalytics]
-  #return(crimeTypeVector)
-  
-  #})
-
-  
-  #output$districtComparatorPlot <- renderPlot({
-   # crimeComparatorType<-crimeComparatorType()
-    #barplot(crimeComparatorType,names.arg=assamDistricts)
-   # plot_ly(assamDistricts, crimeComparatorType, type = "bar")
-  #})
-    
-  #(2) District Comparator Plot
-   output$districtComparatorPlot<- renderPlotly({
-     crime_date<-inner_join(crimeFilterAnalytics(),dateFilterAnalytics())
-     districtComparatorData<-count(crime_date,vars=c("crimedistricts","crimetype"))
-   plot_ly(districtComparatorData, x = ~crimedistricts, y = ~freq, type = 'bar', 
-             name = ~crimetype, color = ~crimetype) %>%
-       layout(title="Compare all districts",xaxis=list(title='Districts'), yaxis =list(title='Number of Crimes'),barmode = 'stack')
+     }else if(analyticsType()=="Crime Trend Plot")
+     {
+       crime_date<-inner_join(crimeFilterAnalytics(),dateFilterAnalytics())
+       districtComparatorData<-count(crime_date,vars=c("crimedistricts","crimetype"))
+       plot_ly(districtComparatorData, x = ~crimedistricts, y = ~freq, type = 'bar', 
+               name = ~crimetype, color = ~crimetype) %>%
+         layout(title="Compare all districts",xaxis=list(title='Districts'), yaxis =list(title='Number of Crimes'),barmode = 'stack')
+       
+     } else{
+       crime_date<-inner_join(crimeFilterAnalytics(),dateFilterAnalytics())
+       crime_date_district<-inner_join(crime_date,districtFilterAnalytics())
+       dateTrendCount<-count(crime_date_district,vars=c("dates"))
+       dateTrend <- dateTrendCount$dates
+       freqTrend <- dateTrendCount$freq
+       plot_ly(x = ~dateTrend, y = ~freqTrend,type = 'scatter', mode = 'lines',line = list(color = 'red', width = 1)) %>% 
+         layout(title = 'Crime Trend Visualisation',
+                xaxis = list(title = 'Timeline'),
+                yaxis = list (title = 'No. of crimes'))
+       
+     }
    })
-   
-  crimeTypeAnalytics<-reactive({
-    input$crimeTypeAnalytics
-  })
-  #(3) TrendPlot
-  output$trendPlot <- renderPlotly({
+ 
     
-    #crime_district<-inner_join(districtFilterAnalytics(),crimeFilterAnalytics())
-    crime_date<-inner_join(crimeFilterAnalytics(),dateFilterAnalytics())
-    crime_date_district<-inner_join(crime_date,districtFilterAnalytics())
-    dateTrendCount<-count(crime_date_district,vars=c("dates"))
-    dateTrend <- dateTrendCount$dates
-    freqTrend <- dateTrendCount$freq
-    plot_ly(x = ~dateTrend, y = ~freqTrend,type = 'scatter', mode = 'lines',line = list(color = 'red', width = 1)) %>% 
-      layout(title = 'Crime Trend Visualisation',
-             xaxis = list(title = 'Timeline'),
-             yaxis = list (title = 'No. of crimes'))
-
-  })
+  
   
     
   })

@@ -1,20 +1,9 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
   
   # Application title
-  #titlePanel("SATARK"),
-  
   navbarPage("SATARK",
              
     #Begin first tab 
@@ -47,7 +36,11 @@ shinyUI(fluidPage(
         tabPanel("Analytics",
                  sidebarPanel(
                    
-                  selectInput(inputId="districtAnalytics", label="District",
+                   radioButtons(inputId="analyticsType", label="Analyse Crime",
+                                choices = list("Crime Pie Chart", "Crime Trend Plot",
+                                               "Compare all districts" ),selected = "Crime Pie Chart"),
+                 
+                   selectInput(inputId="districtAnalytics", label="District",
                                choices=selectAssamDistricts, selected = "All Districts"),
                    
                    selectInput(inputId="crimeTypeAnalytics", label="Crime Type",
@@ -58,17 +51,16 @@ shinyUI(fluidPage(
                                   start = Sys.Date() -365, end = Sys.Date(),
                                   min = Sys.Date() - 700, max = Sys.Date(),
                                   separator = " to ", format = "dd/mm/yy",
-                                  startview = 'year', weekstart = 1)),
+                                  startview = 'year', weekstart = 1)
+                  ),
                  
                  mainPanel(
-                   plotlyOutput("piePlot"),
-                   plotlyOutput("districtComparatorPlot"),
-                   plotlyOutput("trendPlot")
+                   plotlyOutput("analyticsPlot")
+                   #plotlyOutput("districtComparatorPlot"),
+                   #plotlyOutput("trendPlot")
                  )
                  
-                 
-
-),
+  ),
 
 #End of second tab(Analytics)
 
@@ -76,9 +68,6 @@ shinyUI(fluidPage(
         tabPanel("Predictive Analysis")
 #End of third tab (Predpol)
                  
-                 
-)
+    )#Navbar
 
-
-
-))
+))#ui
