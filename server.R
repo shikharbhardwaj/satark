@@ -41,17 +41,13 @@ shinyServer(function(input, output,session) {
     if(mapType()=="Crime Map"){
     district_crime<-inner_join(districtFilter(),crimeFilter())
     district_crime_date<-inner_join(district_crime,dateFilter())
-      assam_leaflet %>%
-      addMarkers(data = district_crime_date,~lng, ~lat,  popup= popupTable(district_crime_date))
+      assam_leaflet %>% 
+      addMarkers(data = district_crime_date,~lng, ~lat,  
+                 popup= popupTable(district_crime_date))
     }else if(mapType()=="Crime Choropleth"){
       districtCount<-count(crimeData,vars=c("crimedistricts"))
       bins <- c(0,3,6,9, 12, 15, 18, 21, 24,27,30,Inf)
       pal <- colorBin("YlOrRd", domain = districtCount$freq, bins = bins)
-  
-     # labels <- sprintf(
-      #  "<strong>%s</strong><br/>%s Crimes",
-       # assamDistricts, districtCount$freq
-      #) %>% lapply(htmltools::HTML)
       labels <- sprintf(
         "<strong>%s</strong><br/>%g Crimes ",
         districtCount$crimedistricts, districtCount$freq
@@ -67,9 +63,9 @@ shinyServer(function(input, output,session) {
           weight = 5,
           color = "#666",
           bringToFront = TRUE),
-        label = labels
-        ) 
-      #%>% setView(92.9376,26.2006, zoom = 6.5)
+        label = labels) %>% 
+        addLegend(pal = pal, values = ~freq, opacity = 0.7, title = NULL,
+                  position = "bottomright") %>% setView(92.9376,26.2006, zoom = 6.5)
     } else {
       assam_leaflet %>%
         addHeatmap(data= crimeData,lng=~lng, lat=~lat,
@@ -114,7 +110,9 @@ shinyServer(function(input, output,session) {
    output$piePlot <- renderPlotly({
   district_date<-inner_join(districtFilterAnalytics(),dateFilterAnalytics())
   piecrimeCount<-count(district_date, vars=c("crimetype"))
-  plot_ly(piecrimeCount, labels = ~crimetype, values=~freq,type = 'pie') 
+  plot_ly(piecrimeCount, labels = ~crimetype, values=~freq,type = 'pie') %>% 
+    layout(title = 'Crime - Pie chart ',showlegend=T) 
+  
   
  })
   
@@ -142,17 +140,22 @@ shinyServer(function(input, output,session) {
   #})
     
     
-  
+  crimeTypeAnalytics<-reactive({
+    input$crimeTypeAnalytics
+  })
   
   output$trendPlot <- renderPlotly({
+    
     crime_district<-inner_join(districtFilterAnalytics(),crimeFilterAnalytics())
     crime_date<-inner_join(crimeFilterAnalytics(),dateFilterAnalytics())
     crime_date_district<-inner_join(crime_date,districtFilterAnalytics())
     dateTrendCount<-count(crime_date_district,vars=c("dates"))
-    
     dateTrend <- dateTrendCount$dates
     freqTrend <- dateTrendCount$freq
-    plot_ly(x = ~dateTrend, y = ~freqTrend,type = 'scatter', mode = 'lines')
+    plot_ly(x = ~dateTrend, y = ~freqTrend,type = 'scatter', mode = 'lines',line = list(color = 'red', width = 1)) %>% 
+      layout(title = 'Crime Trend Visualisation',
+             xaxis = list(title = 'Timeline'),
+             yaxis = list (title = 'No. of crimes'))
 
   })
   

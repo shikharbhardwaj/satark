@@ -73,7 +73,7 @@ shinyUI(fluidPage(
 #End of second tab(Analytics)
 
 #Begin of third tab (Predpol)
-        tabPanel("Crime Prediction")
+        tabPanel("Predictive Analysis")
 #End of third tab (Predpol)
                  
                  

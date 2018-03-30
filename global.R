@@ -11,10 +11,8 @@ library(leaflet)
 library(leaflet.extras) #For heatmaps
 
 #Synthesizing Random Data
-
 crimeData<-read.csv("assamcrimedata.csv")
 colnames(crimeData)<-c("crimetype","crimedistricts","dates","lat","lng")
-#crimeData<-crimeData[,-1]
 crimeData$dates<-as.Date(crimeData$dates)
 
 #Generating Random coordinates for Assam
