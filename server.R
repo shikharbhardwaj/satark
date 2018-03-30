@@ -147,9 +147,101 @@ shinyServer(function(input, output,session) {
   
   
     
-  })
+  
 
       #End of Tab 2(Analytics)  
+
+#Beg of Tab 3 (Victim Data Analytics)
+
+genderFilter<-reactive({
+  if (input$gender=="Both"){
+    genderFilter<-crimeData
+  } else{
+    genderFilter<-crimeData[crimeData$victim_gender==input$gender,]}
+  
+})
+
+ageFilter<-reactive({
+  if(input$age=="All age groups"){
+    ageFilter<-crimeData
+  }else if(input$age=="<18"){
+    ageFilter<-crimeData[crimeData$victim_age<18,]
+  }else if(input$age=="18-30"){
+    ageFilter<-crimeData[crimeData$victim_age>18 & crimeData$victim_age<=30,]
+  }else if(input$age=="30-45"){
+    ageFilter<-crimeData[crimeData$victim_age>30 & crimeData$victim_age<=45,]
+  }else if(input$age=="45>"){
+    ageFilter<-crimeData[crimeData$victim_age>45,]
+  }
+  })
+  
+  
+  victimdistrictFilterAnalytics <- reactive({
+    if (input$victimdistrictAnalytics=="All Districts"){
+      victimdistrictFilterAnalytics<-crimeData
+    } else{
+      victimdistrictFilterAnalytics<-crimeData[crimeData$crimedistricts==input$victimdistrictAnalytics,]}
+  })
+  
+  
+  victimcrimeFilterAnalytics <- reactive({
+   if (input$victimcrimeTypeAnalytics=="All Crimes"){
+    victimcrimeFilterAnalytics<-crimeData
+  } else{
+  victimcrimeFilterAnalytics<-crimeData[crimeData$crimetype==input$victimcrimeTypeAnalytics,]}
+  })
+  
+  victimdateFilterAnalytics<-reactive({
+    victimdateFilterAnalytics<-crimeData[crimeData$dates >= input$victimdateRangeAnalytics[1] & crimeData$dates<=input$victimdateRangeAnalytics[2],]
+    
+  })
+  
+  victimanalyticsType<-reactive({
+    input$victimanalyticsType
+  })
+  
+  
+  age_gender<-reactive({
+    inner_join(ageFilter(),genderFilter())
+    
+  })
+  
+  output$victimanalyticsPlot <- renderPlotly({
+    # (1) Pie Plot   
+    
+    if(victimanalyticsType()=="Crime Pie Chart"){
+      district_date<-inner_join(victimdistrictFilterAnalytics(),victimdateFilterAnalytics())
+      district_date_age_gender<-inner_join(district_date,age_gender())
+      piecrimeCount<-count(district_date_age_gender, vars=c("crimetype"))
+      plot_ly(piecrimeCount, labels = ~crimetype, values=~freq,type = 'pie') %>% 
+        layout(title = 'Crime - Pie chart ',showlegend=T) 
+    }else if(victimanalyticsType()=="Compare all districts")
+    {
+      crime_date<-inner_join(victimcrimeFilterAnalytics(),victimdateFilterAnalytics())
+      crime_date_age_gender<-inner_join(crime_date,age_gender())
+      districtComparatorData<-count(crime_date_age_gender,vars=c("crimedistricts","crimetype"))
+      plot_ly(districtComparatorData, x = ~crimedistricts, y = ~freq, type = 'bar', 
+              name = ~crimetype, color = ~crimetype) %>%
+        layout(title="Compare all districts",xaxis=list(title='Districts'),
+               yaxis =list(title='Number of Crimes'),barmode = 'stack',
+               margin = list(b = 160), xaxis = list(tickangle = 45))
+    } else{
+      crime_date<-inner_join(victimcrimeFilterAnalytics(),victimdateFilterAnalytics())
+      crime_date_district<-inner_join(crime_date,victimdistrictFilterAnalytics())
+      crime_date_district_age_gender<-inner_join(crime_date_district,age_gender())
+      dateTrendCount<-count(crime_date_district_age_gender,vars=c("dates"))
+      dateTrend <- dateTrendCount$dates
+      freqTrend <- dateTrendCount$freq
+      plot_ly(x = ~dateTrend, y = ~freqTrend,type = 'scatter', mode = 'lines',line = list(color = 'red', width = 1)) %>% 
+        layout(title = 'Crime Trend Visualisation',
+               xaxis = list(title = 'Timeline'),
+               yaxis = list (title = 'No. of crimes'))
+      
+    }
+  })
+  
+})
+#End of Tab 3 (Victim Data Analytics)
   
   
   
