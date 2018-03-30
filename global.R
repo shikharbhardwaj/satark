@@ -12,11 +12,11 @@ library(leaflet.extras) #For heatmaps
 
 #Synthesizing Random Data
 
-crimeData<-read.csv("crimeData.csv")
-#colnames(crimeData)<-c("crimetype","crimedistricts","")
-crimeData<-crimeData[,-1]
+crimeData<-read.csv("assamcrimedata.csv")
+colnames(crimeData)<-c("crimetype","crimedistricts","dates","lat","lng")
+#crimeData<-crimeData[,-1]
 crimeData$dates<-as.Date(crimeData$dates)
-colnames(crimeData)<-c("crimeType","lat","lng","dates","crimeDistricts")
+
 #Generating Random coordinates for Assam
 #lat <- runif(446, 26.0000, 27.0000)
 #lng <-runif(446,90.0000,95.5000)
@@ -24,7 +24,7 @@ colnames(crimeData)<-c("crimeType","lat","lng","dates","crimeDistricts")
 #Replacing london coordinates dates with Assam dates
 #crimeData<-cbind(crimedata,lat,lng)
 #crimeData<-crimeData[,-c(2,3)]
-crime_names<-as.character(unique(crimeData$crimeType))
+crime_names<-as.character(unique(crimeData$crimetype))
 crime_names<-c("All Crimes",crime_names)
 
 #Generating random dates and replacing with london dates

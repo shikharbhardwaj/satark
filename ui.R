@@ -51,7 +51,7 @@ shinyUI(fluidPage(
                                choices=selectAssamDistricts, selected = "All Districts"),
                    
                    selectInput(inputId="crimeTypeAnalytics", label="Crime Type",
-                               choices=crime_names,selected="All_Crimes"),
+                               choices=crime_names,selected="All Crimes"),
                    
                   dateRangeInput('dateRangeAnalytics',
                                   label = 'Date Range',

@@ -17,14 +17,14 @@ shinyServer(function(input, output,session) {
     if (input$district=="All Districts"){
       districtFilterData<-crimeData
     } else{
-      districtFilterData<-crimeData[crimeData$crimeDistricts==input$district,]}
+      districtFilterData<-crimeData[crimeData$crimedistricts==input$district,]}
   })
   
   crimeFilter <- reactive({
     if (input$crimeType=="All Crimes"){
       crimeFilterData<-crimeData
     } else{
-      crimeFilterData<-crimeData[crimeData$crimeType==input$crimeType,]}
+      crimeFilterData<-crimeData[crimeData$crimetype==input$crimeType,]}
   })
   
   dateFilter<-reactive({
@@ -44,32 +44,32 @@ shinyServer(function(input, output,session) {
       assam_leaflet %>%
       addMarkers(data = district_crime_date,~lng, ~lat,  popup= popupTable(district_crime_date))
     }else if(mapType()=="Crime Choropleth"){
-      districtCount<-count(crimeData,vars=c("crimeDistricts"))
+      districtCount<-count(crimeData,vars=c("crimedistricts"))
       bins <- c(0,3,6,9, 12, 15, 18, 21, 24,27,30,Inf)
       pal <- colorBin("YlOrRd", domain = districtCount$freq, bins = bins)
   
+     # labels <- sprintf(
+      #  "<strong>%s</strong><br/>%s Crimes",
+       # assamDistricts, districtCount$freq
+      #) %>% lapply(htmltools::HTML)
       labels <- sprintf(
-        "<strong>%s</strong><br/>%s Crimes",
-        assam$DISTRICT, districtCount$freq
+        "<strong>%s</strong><br/>%g Crimes ",
+        districtCount$crimedistricts, districtCount$freq
       ) %>% lapply(htmltools::HTML)
-      
       assam_leaflet %>% addPolygons(
         fillColor = ~pal(districtCount$freq),
         weight = 2,
-        
         opacity = 1,
-        
         dashArray = "3",
-        
         color = "white",
         fillOpacity = 0.7,
         highlight = highlightOptions(
           weight = 5,
           color = "#666",
           bringToFront = TRUE),
-        label = labels,
-        
-      ) %>% setView(92.9376,26.2006, zoom = 6.5)
+        label = labels
+        ) 
+      #%>% setView(92.9376,26.2006, zoom = 6.5)
     } else {
       assam_leaflet %>%
         addHeatmap(data= crimeData,lng=~lng, lat=~lat,
@@ -95,14 +95,14 @@ shinyServer(function(input, output,session) {
     if (input$districtAnalytics=="All Districts"){
       districtFilterAnalytics<-crimeData
     } else{
-      districtFilterAnalytics<-crimeData[crimeData$crimeDistricts==input$districtAnalytics,]}
+      districtFilterAnalytics<-crimeData[crimeData$crimedistricts==input$districtAnalytics,]}
   })
   
   crimeFilterAnalytics <- reactive({
     if (input$crimeTypeAnalytics=="All Crimes"){
       crimeFilterAnalytics<-crimeData
     } else{
-      crimeFilterAnalytics<-crimeData[crimeData$crimeType==input$crimeTypeAnalytics,]}
+      crimeFilterAnalytics<-crimeData[crimeData$crimetype==input$crimeTypeAnalytics,]}
   })
   
   dateFilterAnalytics<-reactive({
@@ -113,8 +113,8 @@ shinyServer(function(input, output,session) {
   #Pie Plot in Tab 2
    output$piePlot <- renderPlotly({
   district_date<-inner_join(districtFilterAnalytics(),dateFilterAnalytics())
-  piecrimeCount<-count(district_date, vars=c("crimeType"))
-  plot_ly(piecrimeCount, labels = ~crimeType, values=~freq,type = 'pie') 
+  piecrimeCount<-count(district_date, vars=c("crimetype"))
+  plot_ly(piecrimeCount, labels = ~crimetype, values=~freq,type = 'pie') 
   
  })
   
@@ -122,13 +122,13 @@ shinyServer(function(input, output,session) {
   crimeComparatorType<-reactive({
   
   crime_date<-inner_join(crimeFilterAnalytics(),dateFilterAnalytics())
-  crimeCount<-count(dateFilterAnalytics(), vars=c("crimeDistricts" , "crimeType"))
-  crimeSpread<-spread(crimeCount,crimeType,freq)
+  crimeCount<-count(dateFilterAnalytics(), vars=c("crimedistricts" , "crimetype"))
+  crimeSpread<-spread(crimeCount,crimetype,freq)
   crimeSpread[is.na(crimeSpread)] <- 0
   rownames(crimeSpread)<-crimeSpread[,1]
   crimeSpread<-crimeSpread[,-1]
   crimeSpread$All<-rowSums(crimeSpread)
-  colnames(crimeSpread)<-crimeSpreadNames
+  colnames(crimeSpread)<-crime_names
   crimeTypeVector<-crimeSpread[,input$crimeTypeAnalytics]
   return(crimeTypeVector)
   
