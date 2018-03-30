@@ -15,10 +15,10 @@ router.get('/admin', (req, res, next)  => {
   res.render('admin', {title: 'Dashboard | Satark'});
 });
 
-router.post('/submit_crime', (req, res, next) => {
-  console.log('Recieved form data : ', req.body.fir_no, req.body.lat,
-  req.body.lng, req.body.crimetype, req.body.address, req.body.datetime);
-  console.log(req.user);
+router.post('/submit_crime', authHelpers.loginRequired, (req, res, next) => {
+  // console.log('Recieved form data : ', req.body.fir_no, req.body.lat,
+  // req.body.lng, req.body.crimetype, req.body.address, req.body.datetime);
+  // console.log(req.user);
   // Get the district which has this point.
   const geo_loc_in = st.point(req.body.lng, req.body.lat);
   const incident_date = req.body.datetime.split(' ')[0];
@@ -38,6 +38,10 @@ router.post('/submit_crime', (req, res, next) => {
       lat: req.body.lat,
       lng: req.body.lng,
       crimedistricts: district,
+      recorded_by: req.user.username,
+      time_of_day: incident_time,
+      victim_age: req.body.victim_age,
+      victim_gender: req.body.victim_gender,
     }).into('crimes').then(() => {
       var string = encodeURIComponent('true');
       res.redirect('/admin?success=' + string);

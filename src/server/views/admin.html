@@ -5,12 +5,12 @@
   <br>
   <form action="/submit_crime" method="POST">
     <div class="form-group">
-      <label for="fir_no">FIR Number:</label>
+      <label for="fir_no">FIR Number</label>
       <input type="text" class="form-control" id="fir_no" placeholder="Enter FIR number" name="fir_no" required>
     </div>
     <div class="form-group">
-      <label for="crimetype">Type of Crime:</label>
-      <input type="text" name="crimetype" list="crimetypes" placeholder="Crime type">
+      <label for="crimetype">Type of Crime</label>
+      <input type="text" name="crimetype" list="crimetypes" placeholder="Crime type" required>
       <datalist id="crimetypes">
         <option value="Possession of weapons">Possession of weapons</option>
         <option value="Other crime">Other crime</option>
@@ -40,8 +40,8 @@
         <div id="map"></div>
       </div>
       <div id='location_details'>
-        <input name='lat' readonly placeholder='Latitude' type = "text" id='lat_show'>
-        <input name='lng' readonly placeholder='Longitude' type = "text" id='lng_show'>
+        <input name='lat' readonly placeholder='Latitude' type = "text" id='lat_show' required>
+        <input name='lng' readonly placeholder='Longitude' type = "text" id='lng_show' required>
         <br />
         <input name='address' readonly placeholder='Address' type = "text" style="width:400px;" id="formatted_address">
       </div>
@@ -49,9 +49,23 @@
 
     <br>
     <div class="form-group">
+      <label for='victim_info'>Victim name</label>
+      <br />
+      <input type="text" class="form-control" id="victim_age" placeholder="Victim age (if applicable)" name="victim_age" class="input-sm" style="width:200px;">
+
+      <br />
+      <label for='victim_info'>Victim gender</label>
+      <br />
+      <select name='victim_gender'>
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+        <option value="O">Other</option>
+      </select>
+    </div>
+    <div class="form-group">
       <label for='datetime'>Date and time</label>
       <div class='input-group date'>
-       <input type='text' class="form-control" id='datetimepicker1' name='datetime' placeholder='Date and time of incident'/>
+       <input type='text' class="form-control" id='datetimepicker1' name='datetime' placeholder='Date and time of incident' required/>
       </div>
     </div>
 </div>
