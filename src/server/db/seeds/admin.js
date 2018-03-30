@@ -7,19 +7,9 @@ exports.seed = (knex, Promise) => {
     const hash = bcrypt.hashSync('johnson123', salt);
     return Promise.join(
       knex('users').insert({
-        username: 'jeremy',
+        username: 'birendra87',
+        station_id: 890,
         password: hash
-      })
-    );
-  })
-  .then(() => {
-    const salt = bcrypt.genSaltSync();
-    const hash = bcrypt.hashSync('bryant123', salt);
-    return Promise.join(
-      knex('users').insert({
-        username: 'kelly',
-        password: hash,
-        admin: true
       })
     );
   });

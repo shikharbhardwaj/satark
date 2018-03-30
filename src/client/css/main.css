@@ -147,6 +147,130 @@ hr {
   }
 }
 
-#close-cross{
-  float: right;
+#close_cross {
+  display: inline-block;
+  position: fixed;
+  right:12%;
+  cursor:pointer;
+  font-size:16px;
+  z-index: 1000;
+  top: 10px;
+}
+
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+#map {
+  height: 100%;
+}
+
+#description {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+#infowindow-content .title {
+  font-weight: bold;
+}
+
+#infowindow-content {
+  display: none;
+}
+
+#map #infowindow-content {
+  display: inline;
+}
+
+.pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto;
+}
+
+#pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+#title {
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+
+#target {
+  width: 345px;
+}
+
+#location_getter {
+  display: none;
+  /* position:fixed;
+  height: 50%;
+  width: 80%;
+  top: 25%;
+  left: 10%; */
+  height: 50%;
+  padding-top: 0;
+}
+
+#location_activate {
+  width: 140px;
+}
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: none;
+  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#notification_box {
+  background-color:rgb(72, 216, 101);
+  color:white;
+  cursor:pointer;
+  display: none;
+  padding:15px;
+  position:absolute;
+  right: 20px;
+  bottom: 1em;
+  z-index: 50;
+  font-size: 2rem;
+  border-radius: 10px;
 }

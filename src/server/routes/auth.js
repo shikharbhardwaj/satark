@@ -21,7 +21,7 @@ router.post('/login', authHelpers.loginRedirect, (req, res, next) => {
     if (user) {
       req.logIn(user, function (err) {
         if (err) { handleResponse(res, 500, 'error'); }
-        handleResponse(res, 200, 'success');
+        res.redirect('/admin');
       });
     }
   })(req, res, next);

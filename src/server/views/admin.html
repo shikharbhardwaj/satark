@@ -1,0 +1,74 @@
+{% extends "_base.html" %} {% block title %}{% endblock %} {% block content %}
+
+<div class="container">
+  <h2>Criminal incident entry</h2>
+  <div id="details">
+  </div>
+</div>
+<div class="container">
+  <br>
+  <form action="/action_page.php">
+    <div class="form-group">
+      <label for="fir_no">FIR Number:</label>
+      <input type="text" class="form-control" id="fir_no" placeholder="Enter FIR number" name="fir_no" required>
+    </div>
+    <div class="form-group">
+      <label for="crimetype">Type of Crime:</label>
+      <input type="text" name="crimetype" list="crimetypes" placeholder="Crime type">
+      <datalist id="crimetypes">
+        <option value="Possession of weapons">Possession of weapons</option>
+        <option value="Other crime">Other crime</option>
+        <option value="Shoplifting">Shoplifting</option>
+        <option value="Criminal damage and arson">Criminal damage and arson</option>
+        <option value="Robbery">Robbery</option>
+        <option value="Burglary">Burglary</option>
+        <option value="Drugs">Drugs</option>
+        <option value="Other theft">Other theft</option>
+        <option value="Public order">Public order</option>
+        <option value="Violence and sexual offences">Violence and sexual offences</option>
+        <option value="Vehicle crime">Vehicle crime</option>
+        <option value="Bicycle theft">Bicycle theft</option>
+        <option value="Theft from the person">Theft from the person</option>
+        <option value="Anti-social behaviour">Anti-social behaviour</option>
+      </datalist>
+    </div>
+
+    <!-- LOCATION -->
+    <div class="form-group">
+      <label for="location">Crime location</label>
+      <br />
+      <button id="location_activate" class="btn btn-primary">Input location</button>
+      <div id="location_getter" class="modal modal-content">
+        <i class="fa fa-close" title="Close Modal" id="close_cross"></i>
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+        <div id="map"></div>
+      </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class='input-group date' id='datetimepicker1'>
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+
+    <div>
+      <label for="crime_time">Crime time: (hh:mm)</label>
+      <br>
+      <input type="time" name="time" required>
+    </div>
+    <br>
+
+    <button type="submit" class="btn-btn-default">Submit</button>
+  </form>
+</div>
+
+
+{% endblock %} {% block scripts %}
+<script src="js/location_search.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoG2logQ_ZvNAsKEp6ZVxRZlyuUfj_22Y&libraries=places&callback=initAutocomplete"
+  async defer></script> {% endblock %}
