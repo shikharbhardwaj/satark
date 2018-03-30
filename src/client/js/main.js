@@ -23,6 +23,5 @@ $(document).ready(function () {
     modal.style.display = 'none';
     overlay.style.display = 'none';
   });
-
   $('#datetimepicker1').datetimepicker();
 });

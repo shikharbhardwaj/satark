@@ -238,11 +238,10 @@ hr {
 
 #location_getter {
   display: none;
-  /* position:fixed;
+  position:fixed;
   height: 50%;
   width: 80%;
   top: 25%;
-  left: 10%; */
   height: 50%;
   padding-top: 0;
 }
@@ -273,4 +272,9 @@ hr {
   z-index: 50;
   font-size: 2rem;
   border-radius: 10px;
+}
+
+#location_details input{
+  display: inline-block;
+  width: 200px;
 }

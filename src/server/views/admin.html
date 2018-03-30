@@ -2,12 +2,8 @@
 
 <div class="container">
   <h2>Criminal incident entry</h2>
-  <div id="details">
-  </div>
-</div>
-<div class="container">
   <br>
-  <form action="/action_page.php">
+  <form action="/submit_crime" method="POST">
     <div class="form-group">
       <label for="fir_no">FIR Number:</label>
       <input type="text" class="form-control" id="fir_no" placeholder="Enter FIR number" name="fir_no" required>
@@ -43,28 +39,25 @@
         <input id="pac-input" class="controls" type="text" placeholder="Search Box">
         <div id="map"></div>
       </div>
+      <div id='location_details'>
+        <input name='lat' readonly placeholder='Latitude' type = "text" id='lat_show'>
+        <input name='lng' readonly placeholder='Longitude' type = "text" id='lng_show'>
+        <br />
+        <input name='address' readonly placeholder='Address' type = "text" style="width:400px;" id="formatted_address">
+      </div>
     </div>
 
-
-
-    <div class="form-group">
-        <div class='input-group date' id='datetimepicker1'>
-            <input type='text' class="form-control" />
-            <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-        </div>
-    </div>
-
-    <div>
-      <label for="crime_time">Crime time: (hh:mm)</label>
-      <br>
-      <input type="time" name="time" required>
-    </div>
     <br>
+    <div class="form-group">
+      <label for='datetime'>Date and time</label>
+      <div class='input-group date'>
+        <input type='text' class="form-control" id='datetimepicker1' name='datetime' placeholder='Date and time of incident' />
+      </div>
+    </div>
+</div>
 
-    <button type="submit" class="btn-btn-default">Submit</button>
-  </form>
+<button type="submit" class="btn-btn-default">Submit</button>
+</form>
 </div>
 
 

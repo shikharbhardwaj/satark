@@ -9,6 +9,9 @@
 
 function fill_location(latLng, address) {
   console.log('Selected Geolocation : ', latLng, ' has address ', address);
+  $('#lat_show').val(latLng.lat);
+  $('#lng_show').val(latLng.lng);
+  $('#formatted_address').val(address);
 }
 function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map'), {
