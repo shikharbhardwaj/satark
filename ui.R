@@ -62,7 +62,7 @@ shinyUI(fluidPage(
                  
                  mainPanel(
                    plotlyOutput("piePlot"),
-                   #plotOutput("districtComparatorPlot"),
+                   plotlyOutput("districtComparatorPlot"),
                    plotlyOutput("trendPlot")
                  )
                  
