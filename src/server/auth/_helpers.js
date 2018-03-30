@@ -23,7 +23,7 @@ function createUser(req, res) {
 }
 
 function loginRequired(req, res, next) {
-  if (!req.user) return res.status(401).json({status: 'Please log in'});
+  if (!req.user) return res.redirect('/');
   return next();
 }
 
@@ -40,8 +40,7 @@ function adminRequired(req, res, next) {
 }
 
 function loginRedirect(req, res, next) {
-  if (req.user) return res.status(401).json(
-    {status: 'You are already logged in'});
+  if (req.user) return res.redirect('/admin');
   return next();
 }
 

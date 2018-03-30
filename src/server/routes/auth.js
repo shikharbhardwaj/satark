@@ -29,7 +29,7 @@ router.post('/login', authHelpers.loginRedirect, (req, res, next) => {
 
 router.get('/logout', authHelpers.loginRequired, (req, res, next) => {
   req.logout();
-  handleResponse(res, 200, 'success');
+  res.redirect('/');
 });
 
 // *** helpers *** //

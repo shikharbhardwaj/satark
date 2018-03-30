@@ -11,7 +11,7 @@ const authHelpers = require('../auth/_helpers');
 //   handleResponse(res, 200, 'success');
 // });
 
-router.get('/admin', (req, res, next)  => {
+router.get('/admin', authHelpers.loginRequired, (req, res, next)  => {
   res.render('admin', {title: 'Dashboard | Satark'});
 });
 
