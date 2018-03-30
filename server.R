@@ -43,7 +43,7 @@ shinyServer(function(input, output,session) {
     district_crime_date<-inner_join(district_crime,dateFilter())
       assam_leaflet %>%
       addMarkers(data = district_crime_date,~lng, ~lat,  popup= popupTable(district_crime_date))
-    }else{
+    }else if(mapType()=="Crime Choropleth"){
       districtCount<-count(crimeData,vars=c("crimeDistricts"))
       bins <- c(0,3,6,9, 12, 15, 18, 21, 24,27,30,Inf)
       pal <- colorBin("YlOrRd", domain = districtCount$freq, bins = bins)
@@ -70,10 +70,16 @@ shinyServer(function(input, output,session) {
         label = labels,
         
       ) %>% setView(92.9376,26.2006, zoom = 6.5)
-      
-      
+    } else {
+      assam_leaflet %>%
+        addHeatmap(data= crimeData,lng=~lng, lat=~lat,
+                   blur = 20, max = 0.05, radius = 15 ) %>% setView(92.9376,26.2006, zoom = 6.5) 
       
     }
+      
+      
+      
+    
     
        })
   
