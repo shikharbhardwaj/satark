@@ -19,11 +19,19 @@ router.post('/submit_crime', authHelpers.loginRequired, (req, res, next) => {
   // console.log('Recieved form data : ', req.body.fir_no, req.body.lat,
   // req.body.lng, req.body.crimetype, req.body.address, req.body.datetime);
   // console.log(req.user);
+
   // Get the district which has this point.
   const geo_loc_in = st.point(req.body.lng, req.body.lat);
+  // Split date and time.
   const incident_date = req.body.datetime.split(' ')[0];
   const incident_time = req.body.datetime.split(' ')[1];
+  // This report was mode now.
   const report_date = new Date();
+  // Set optional fields as undefined.
+  req.body.address = (req.body.address == '') ? undefined : req.body.address;
+  req.body.victim_name = (req.body.victim_name == '') ? undefined : req.body.victim_name;
+  req.body.victim_age = (req.body.victim_age == '') ? undefined : req.body.victim_age;
+
   const sql1 =
   knex.select('district').from('assam_dist').where(st.intersects(geo_loc_in,
   'geom')).then(function(rows) {

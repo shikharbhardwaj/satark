@@ -102,7 +102,7 @@ function initAutocomplete() {
   map.addListener('click', function (e) {
     var latLng = { lat: e.latLng.lat(), lng: e.latLng.lng() };
     input.style.border = '1px green solid';
-    notify('Location updated');
+    notify_success('Location updated');
     geocodeLatLng(latLng).then((address) => {
       fill_location(latLng, address);
     });
