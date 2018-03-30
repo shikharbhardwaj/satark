@@ -46,7 +46,8 @@ shinyServer(function(input, output,session) {
       addMarkers(data = district_crime_date,~lng, ~lat,  
                  popup= popupTable(district_crime_date))
     }else if(mapType()=="Crime Choropleth"){
-      districtCount<-count(crimeData,vars=c("crimedistricts"))
+      crime_date<-inner_join(crimeFilter(),dateFilter())
+      districtCount<-count(crime_date,vars=c("crimedistricts"))
       bins <- c(0,3,6,9, 12, 15, 18, 21, 24,27,30,Inf)
       pal <- colorBin("YlOrRd", domain = districtCount$freq, bins = bins)
       labels <- sprintf(
@@ -68,8 +69,9 @@ shinyServer(function(input, output,session) {
         addLegend(pal = pal, values = ~freq, opacity = 0.7, title = NULL,
                   position = "bottomright") %>% setView(92.9376,26.2006, zoom = 6.5)
     } else {
+      crime_date<-inner_join(crimeFilter(),dateFilter())
       assam_leaflet %>%
-        addHeatmap(data= crimeData,lng=~lng, lat=~lat,
+        addHeatmap(data= crime_date,lng=~lng, lat=~lat,
                    blur = 20, max = 0.05, radius = 15 ) %>% setView(92.9376,26.2006, zoom = 6.5) 
       
     }
