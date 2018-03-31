@@ -9,9 +9,24 @@ library(plotly)     # makes ggplot objects interactive
 library(mapview)    # quick interactive viewing of spatial objects
 library(leaflet)
 library(leaflet.extras) #For heatmaps
+library(DBI)
+#library(dbplyr)
+library(RPostgreSQL)
+
+# Open up a database connection.
+
+pg = dbDriver("PostgreSQL")
+
+con = dbConnect(pg, user = 'node_user', password = "eztoforget",
+                host="35.200.168.215", port=5432, dbname="satark_db")
+
+data <- dbSendQuery(con, 'SELECT dates, crimetype, crimedistricts, lat, lng,
+                    victim_age, victim_gender FROM crimes;')
+crimeData <- dbFetch(data,n=-1)
 
 #Synthesizing Random Data
-crimeData<-read.csv("assamcrimedata.csv")
+#crimeData<-as.data.frame(data)
+#crimeData<-read.csv("assamcrimedata.csv")
 #colnames(crimeData)<-c("dates","crimetype","crimedistricts","dates","lat","lng")
 crimeData$dates<-as.Date(crimeData$dates)
 
