@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    {% if title %}
-      <title>{{ title }}</title>
-    {% else %}
-      <title>Something. Something. Something.</title>
-    {% endif %}
-    <!-- stylesheets -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/main.css">
 
-    {% block css %}{% endblock %}
-  </head>
-  <body>
-    <div id = "overlay"></div>
-    <div id = "notification_box" class="lead"></div>
-      {% block content %}
-      {% endblock %}
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content=""> {% if title %}
+  <title>{{ title }}</title>
+  {% else %}
+  <title>Something. Something. Something.</title>
+  {% endif %}
+  <!-- stylesheets -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/yeti/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css"> {% block css %}{% endblock %}
+</head>
+
+<body>
+  <div class="bg" style='overflow-x:hidden;'>
+    <div class="header">
+      <!-- <img src="Logo.png" height="90" width="90"> -->
+      <h1>Satark</h1>
+      <br />
+    </div>
+
+    <div class="navbar" style="margin-bottom:0;">
+      <a class="active" href="/">Home</a>
+      <a href="/aboutUs.html">About Us</a>
+      <a href="/contactUs.html">Contact Us</a>
+      <!--  <a href="#" class="right">Go Back</a> -->
+    </div>
+
+    <div id="overlay"></div>
+    <div id="notification_box" class="lead"></div>
+    {% block content %} {% endblock %}
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script> 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha256-uz0BcnPtSHZ02XZthAHPRYIoWWrcwMOmAk9ErnFQkNs=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha256-uz0BcnPtSHZ02XZthAHPRYIoWWrcwMOmAk9ErnFQkNs="
+      crossorigin="anonymous"></script>
 
     <script src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-    <script type="text/javascript" src="/js/main.js"></script>
-    {% block scripts %}{% endblock %}
-  </body>
+    <script type="text/javascript" src="/js/main.js"></script> {% block scripts %}{% endblock %}
+</body>
+
 </html>

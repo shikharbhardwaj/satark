@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Page Title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+    box-sizing: border-box;
+  }
+h2 {
+    color: maroon;
+    text-align: justify-all;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    background-color:#FFC733 ;
+    border: 3px solid #555;
+}
+
+li a {
+    display: inline-block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+img
+{
+  float: left;
+}
+a[target]
+{
+  background-color: green;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    font-size: 20px;
+}
+.main a{
+   background-color: blue;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+}
+/* Style the header */
+.header img{
+  align-content: center;
+  padding-top: 10px;
+}
+
+.header {
+    padding: 30px;
+    text-align: justify-all;
+    background: #222D55;
+    color: white;
+}
+
+/* Increase the font size of the h1 element */
+.header h1 {
+    font-size: 55px;
+}
+
+/* Style the top navigation bar */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+    float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Column container */
+.row {  
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+    flex: 10%;
+    background-color: #f1f1f1;
+    padding: 30px;
+}
+
+/* Main column */
+.main {   
+    flex: 70%;
+    background-color: white;
+    padding: 20px;
+}
+
+/* image, just for this example */
+.img {
+  
+    background-color: #aaa;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+    .row {   
+        flex-direction: column;
+    }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+    .navbar a {
+        float: none;
+        width:100%;
+    }
+}
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("http://www.macleans.ca/wp-content/uploads/2017/06/JUNE16_MUNRO_POST.jpeg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+</style>
+</head>
+<body >
+
+
+<div class="bg">
+<div class="header">
+  <img src= "Logo.png" height="90" width="90">
+  <h1>SATARK</h1>
+  <p></p>
+</div>
+
+<div class="navbar">
+  <a class="active" href="main.html">Home</a>
+  <a href="aboutUs.html">About Us</a>
+  <a href="contactUs.html">Contact Us</a>
+ <!--  <a href="#" class="right">Go Back</a> -->
+</div>
+  
+  <div class="main">
+      <h1>ABOUT US</h1>
+      <div class="fakeimg" style="height:100px;">
+        <img src="https://brakpanherald.co.za/wp-content/uploads/sites/27/2015/10/stop-the-crime.jpg" alt="Stop Crime" height="142" width="1042">
+      </div>
+      <br><br><br><br>
+
+      <h2>Assam Police at a glance</h2>
+      <p>Assam Police is a mammoth organization with a sanctioned strength of approximately 65,000 (sixty five thousand). The chart below illustrates the rank and file of the officers and men. It is led by the Director General of Police and the Inspector General of Police with its Headquarters located at Ulubari, Guwahati. 
+
+      The Director General of Police is assisted by several organizations such as the Assam Police Housing Corporation Limited (APHC), Assam Police Radio Organisation (APRO), Chief Minister’s Special Vigilance Cell (CM’s SVC), Civil Defence and Home Guard (CD&HG), Criminal Investigation Department (CID), Border Organization, Bureau of Investigation (Economic Offences) (BIEO), Fire & Emergency Services (FES), Guwahati Police Commissionerate, Prosecution Wing, Railway Police, River Police Organisation, Special Branch (SB), Special Task Force (STF), Training & Armed Police (T&AP), Vigilance and Anti Corruption (V&AC), Village Defence Organisation (VDO), besides 7 (seven) Police Ranges – Central Range (CR), Central Western Range (CWR), Eastern Range (ER), Bodoland Territorial Autonomous District (BTAD) Range, Northern Range (NR), Southern Range (SR) and Western Range (WR), 35 (thirty five) Police Districts and 14 (fourteen) Assam Police Battalions (APBn), 9 (nine) Assam Police (India Reserve) Battalions including ONGC Battalion, 4 (four) Assam Police Task Force Battalions (APTF Bn), 1 (one) Commando Battalion and 6 (six) Police Training units – Police Training College (PTC), Battalion Training Centre (BTC), Armed Police Training Centre (APTC), Recruit Training School (RTS), APRO Training School, and Regional Training Centre for FES as well as 10 (ten) District Training Centres for CD&HG. 
+
+      <h2>History of Assam Police</h2>
+      <p>Before the advent of the British there did not seem to be any organised police force in Assam, either under the Ahom Kings or earlier.The army as well as the various officers of the kingdom were responsible for the maintenance of peace and safeguarding the lives and properties of the people. On taking over the administration of Assam, the British also did not immediately introduce any revolutionary changes in this respect and the army was employed in the task of maintaining law and order. Army out posts were also set up at different places for this purpose.
+      The high expenditure involved in maintaining a large body of troops at a time when the country had just settled down, compelled the government of the time to undertake a review of the situation and a policy of gradual reduction of the forces was adopted. By 1839-40 the number of troops in Assam was reduced to four regiments only. Along with the reduction of troops, steps were taken to increase the armed component of the Civil Police in the province. The necessity of raising a separate force under the civil government apart from the armed civil Police was also felt and the first unit of this new organisation was formed in the year 1835 by one Mr. Grange who was the Head of the Civil administration of Nowgong District at that time.
+
+      Till the advent of the British the police force was not a separate and distinct organisation entrusted with specific functions. The British created it to serve its colonial interests, and hence, it was loyal to the British Government. But after independence, it has undergone a dramatic change and today its loyalty is not merely to the Government, but also to the Sate, the Constitution and to the laws of the land.
+
+      There is no evidence of there being a regular police force in the state of Assam till the British took over after the Yandabu treaty of 1826. At the fag end of the Ahom rule and during the reign of Kamaleswar Singha (1795 -1811), an armed force on the British model was raised to serve the dual functions of maintenance of law and order and border defence. It was, however, not a regular and fully organised police force in the real sense of the term. After 1862, the British deployed regular troops in several parts of Assam to consolidate its occupation and a police establishment consisting of one Darogah, one Jamadhar and a number of constables was maintained at each district headquarters.The most important development in this process was the raising of the "Cachar Levy" in 1835 by the Civil Service Officer, in-charge of Nowgong district, Mr. Grange, to guard new settlements and tea estates. It consisted of 750 officers and men of different ranks, viz., Inspectors, Head Constables and Constables. Three years later, a similar body, called "Jorhat Militia", was formed to protect the border areas against frequent border transgressions. It was also known as the "Shan" militia, as the recruits were mostly from the Shan community. Eventually it was merged with the "Cachar Levy", which was subsequently renamed as "Frontier Police" in 1883 and then as "Assam Military Police" in 1891 and then again as "Assam Rifles" in 1920. The duties of the levy included the guarding of the Eastern Frontier of Assam from the Brahmaputra River to Cachar. The levy was a force of a semi-military nature. The men were poorly paid and the duties were arduous and often involving fighting. It is important to note that at the initial stage most of the recruits were from Bengal, as the local Assamese were not interested in joining the low-paid police service.
+
+      <h2>
+  </div>
+</div>
+
+</body>
+</html>
