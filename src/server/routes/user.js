@@ -5,6 +5,8 @@ const knex = require('../db/connection');
 const knexPostgis = require('knex-postgis');
 const st = knexPostgis(knex);
 
+const moment = require('moment');
+
 const authHelpers = require('../auth/_helpers');
 
 // router.get('/user', authHelpers.loginRequired, (req, res, next)  => {
@@ -23,7 +25,8 @@ router.post('/submit_crime', authHelpers.loginRequired, (req, res, next) => {
   // Get the district which has this point.
   const geo_loc_in = st.point(req.body.lng, req.body.lat);
   // Split date and time.
-  const incident_date = req.body.datetime.split(' ')[0];
+  const incident_date = moment(req.body.datetime.split(' ')[0],
+    'DD-MM-YYYY').format('YYYY-MM-DD');
   const incident_time = req.body.datetime.split(' ')[1];
   // This report was mode now.
   const report_date = new Date();
