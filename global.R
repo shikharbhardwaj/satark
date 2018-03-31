@@ -43,3 +43,7 @@ assam_leaflet<-leaflet(assam) %>% addTiles() %>%
               opacity = 1.0, fillOpacity = 0.5,
               highlightOptions = highlightOptions(color = "black", weight = 2,
                                                   bringToFront = TRUE))
+
+
+
+
